@@ -38,9 +38,7 @@ export default function App() {
        cameraRef.current.setLookAt(0, 0.7, 2, 0.3, 0.4, 0, true)
     } else if (phase === 2) {
       if (isPortrait) {// 縦長デバイスの場合
-        cameraRef.current.setLookAt(0.29, 0.26, -0.12, 0.29, 0.10, 1.00, true)
-     //    cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.10, 1.00, true)
-       // cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.30, 1.00, true)
+        cameraRef.current.setLookAt(0.29, 0.26, -0.12, 0.29, 0.15, 1.00, true)
       } else {
         cameraRef.current.setLookAt(0.29, 0.35, 0.34, 0.29, 0.30, 1.00, true)
       }
