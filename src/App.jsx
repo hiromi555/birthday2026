@@ -38,9 +38,9 @@ export default function App() {
        cameraRef.current.setLookAt(0, 0.7, 2, 0.3, 0.4, 0, true)
     } else if (phase === 2) {
       if (isPortrait) {// 縦長デバイスの場合
-        cameraRef.current.setLookAt(0.29, 0.39, -0.01, 0.29, 0.30, 1.00, true)
+        cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.30, 1.00, true)
       } else {
-        cameraRef.current.setLookAt(0.29, 0.38, 0.42, 0.29, 0.30, 1.00, true)
+        cameraRef.current.setLookAt(0.29, 0.35, 0.34, 0.29, 0.30, 1.00, true)
       }
     } else if (phase === 3) {
       cameraRef.current.setLookAt(0, 0.3, 1.6, -0.1, -0.2, 0, true)
@@ -139,16 +139,16 @@ export default function App() {
            />
             {phase !== 3 && (
                 <group position={[0.2, -0.5, 0]}>
-                    <group visible={phase !== 2}>
+                    <group visible={phase !== 2}  position-x={ 0.05 } position-z={ -0.05 }>
                         <Avatar animation={phase === 0 ? "Typing" : "Pointing"} />
                     </group>
                     {/* 最初（Phase 0）だけデスクを表示 */}
 
-                    <group visible={phase === 0} scale={[1, 0.93, 1]}>
+                    <group visible={phase === 0} scale={[1, 0.92, 1]}>
                         <Desk />
                     </group>
                     {/* PCは動画が終わるまでずっと表示 */}
-                    <group scale={[1, 0.93, 1]}>
+                    <group scale={[1, 0.92, 0.9]}>
                         <Laptop
                             phase={phase}
                             onEnded={handleVideoEnd}
