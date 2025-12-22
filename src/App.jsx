@@ -38,7 +38,9 @@ export default function App() {
        cameraRef.current.setLookAt(0, 0.7, 2, 0.3, 0.4, 0, true)
     } else if (phase === 2) {
       if (isPortrait) {// 縦長デバイスの場合
-        cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.30, 1.00, true)
+        cameraRef.current.setLookAt(0.29, 0.26, -0.12, 0.29, 0.10, 1.00, true)
+     //    cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.10, 1.00, true)
+       // cameraRef.current.setLookAt(0.29, 0.35, -0.01, 0.29, 0.30, 1.00, true)
       } else {
         cameraRef.current.setLookAt(0.29, 0.35, 0.34, 0.29, 0.30, 1.00, true)
       }
@@ -48,17 +50,17 @@ export default function App() {
   }, [phase, isPortrait])
 
 //デバック用
-//   useEffect(() => {
-//   const logPosition = () => {
-//     if (cameraRef.current) {
-//       const pos = cameraRef.current.getPosition() // カメラの位置
-//       const tgt = cameraRef.current.getTarget()   // 見ている中心点
-//       console.log(`cameraRef.current.setLookAt(${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)}, ${tgt.x.toFixed(2)}, ${tgt.y.toFixed(2)}, ${tgt.z.toFixed(2)}, true)`)
-//     }
-//   }
-//   window.addEventListener('click', logPosition)
-//   return () => window.removeEventListener('click', logPosition)
-//   }, [])
+  useEffect(() => {
+  const logPosition = () => {
+    if (cameraRef.current) {
+      const pos = cameraRef.current.getPosition() // カメラの位置
+      const tgt = cameraRef.current.getTarget()   // 見ている中心点
+      console.log(`cameraRef.current.setLookAt(${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)}, ${tgt.x.toFixed(2)}, ${tgt.y.toFixed(2)}, ${tgt.z.toFixed(2)}, true)`)
+    }
+  }
+  window.addEventListener('click', logPosition)
+  return () => window.removeEventListener('click', logPosition)
+  }, [])
 
   const handleVideoEnd = () => {
     setPhase(3)
