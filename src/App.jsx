@@ -143,15 +143,18 @@ export default function App() {
                         <Avatar animation={phase === 0 ? "Typing" : "Pointing"} />
                     </group>
                     {/* 最初（Phase 0）だけデスクを表示 */}
-                    <group visible={phase === 0}>
+
+                    <group visible={phase === 0} scale={[1, 0.93, 1]}>
                         <Desk />
                     </group>
                     {/* PCは動画が終わるまでずっと表示 */}
-                    <Laptop
-                        phase={phase}
-                        onEnded={handleVideoEnd}
-                        onVideoReady={() => setIsVideoReady(true)}
-                    />
+                    <group scale={[1, 0.93, 1]}>
+                        <Laptop
+                            phase={phase}
+                            onEnded={handleVideoEnd}
+                            onVideoReady={() => setIsVideoReady(true)}
+                        />
+                    </group>
                 </group>
             )}
             {phase === 3 && (
