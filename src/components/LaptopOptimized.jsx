@@ -4,11 +4,11 @@ import { useGLTF, useVideoTexture } from '@react-three/drei'
 export function Laptop({ phase, onEnded, onVideoReady, ...props }) {
   const { nodes, materials } = useGLTF('Laptop-transformed.glb')
 
-  const texture = useVideoTexture('Compressed-video.mp4', {
-    src: 'Compressed-video.mp4',
+  const texture = useVideoTexture('video1.mp4', {
+    src: 'video1.mp4',
     start: false,
     loop: false,
-    muted: false,
+    muted: true,
     playsInline: true
   })
 
@@ -36,6 +36,7 @@ export function Laptop({ phase, onEnded, onVideoReady, ...props }) {
     if (video) {
       video.loop = false
       if (phase === 2) {
+        video.muted = false // ここで音を解禁！
         video.currentTime = 0.2
         video.muted = false
         video.play().catch((e) => console.error("Play error:", e))
