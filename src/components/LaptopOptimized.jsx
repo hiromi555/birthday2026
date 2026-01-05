@@ -28,13 +28,32 @@ export const Laptop = forwardRef(({ phase, onEnded, onVideoReady, ...props }, re
   // ビデオのロード監視
   useEffect(() => {
     if (!video) return
-    const handleCanPlay = () => onVideoReady && onVideoReady()
 
-    if (video.readyState >= 3) {
-      handleCanPlay()
+    let isReady = false
+    const handleReady = () => {
+      if (!isReady) {
+        isReady = true
+        onVideoReady && onVideoReady()
+      }
+    }
+
+    // A. 普通の監視（レベル1以上で合格）
+    if (video.readyState >= 1) {
+      handleReady()
     } else {
-      video.addEventListener('canplay', handleCanPlay)
-      return () => video.removeEventListener('canplay', handleCanPlay)
+      video.addEventListener('loadedmetadata', handleReady)
+    }
+
+    // B. 【保険】もし3秒経っても反応がなければ、強制的にReadyにする
+    // （iPhoneが完全に読み込みをサボっている場合への対策）
+    const timer = setTimeout(() => {
+      console.log("Force video ready due to timeout")
+      handleReady()
+    }, 3000) // 3000ms = 3秒
+
+    return () => {
+      video.removeEventListener('loadedmetadata', handleReady)
+      clearTimeout(timer)
     }
   }, [video, onVideoReady])
 
@@ -44,11 +63,9 @@ export const Laptop = forwardRef(({ phase, onEnded, onVideoReady, ...props }, re
     video.loop = false
     const handleEnded = () => onEnded && onEnded()
     video.addEventListener('ended', handleEnded)
-
     if (phase !== 2) {
       video.pause()
     }
-
     return () => video.removeEventListener('ended', handleEnded)
   }, [phase, video, onEnded])
 
