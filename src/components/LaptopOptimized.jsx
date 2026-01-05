@@ -4,11 +4,11 @@ import { useGLTF, useVideoTexture } from '@react-three/drei'
 export function Laptop({ phase, onEnded, onVideoReady, ...props }) {
   const { nodes, materials } = useGLTF('Laptop-transformed.glb')
 
-  const texture = useVideoTexture('video1.mp4', {
+  const texture = useVideoTexture('video.mp4', {
     src: 'video.mp4',
     start: false,
     loop: false,
-    muted: false,
+    muted: true,
     playsInline: true
   })
 
