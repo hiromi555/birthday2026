@@ -15,7 +15,7 @@ export default function App() {
   const [isReady, setIsReady] = useState(false)
   const [isVideoReady, setIsVideoReady] = useState(false)
  //progressバー
-  const isLoaded = progress === 100 && isVideoReady
+  const isLoaded = progress === 100 
   const laptopRef = useRef()
   useEffect(() => {
     if (isLoaded) {
