@@ -7,6 +7,7 @@ import { Laptop } from './components/LaptopOptimized.jsx'
 
 export default function App() {
   const cameraRef = useRef()
+  const laptopRef = useRef()
   // 0:仕事中, 1:指差し, 2:動画再生, 3:終了
   const [phase, setPhase] = useState(0)
   const { progress } = useProgress()
@@ -90,25 +91,20 @@ export default function App() {
         )}
 
         {phase === 1 && (
-          <button
-            className="action-btn btn-play"
-            onClick={() => setPhase(2)}
-          >
-           🎵 🎬 Play Movie
-          </button>
+            <button
+                className="action-btn btn-play"
+                onClick={() => {
+                    laptopRef.current?.playWithSound()
+                    setPhase(2)
+                }}
+            >
+            🎵 🎬 Play Movie
+            </button>
         )}
 
         {phase === 3 && (
             <div className="end-card">
-                {/* <h1><span>HAPPY BIRTHDAY!</span> </h1>
-                */}
                 <h1><span>素敵な一年になりますように</span>🎉</h1>
-                <button
-                className="action-btn btn-replay"
-                onClick={() => setPhase(2)}
-                >
-                🔄 Replay
-                </button>
             </div>
          )}
         </div>
@@ -149,10 +145,11 @@ export default function App() {
                     </group>
                     {/* PCは動画が終わるまでずっと表示 */}
                     <group scale={[1, 0.92, 0.9]}>
-                        <Laptop
-                            phase={phase}
-                            onEnded={handleVideoEnd}
-                            onVideoReady={() => setIsVideoReady(true)}
+                       <Laptop
+                        ref={laptopRef}
+                        phase={phase}
+                        onEnded={handleVideoEnd}
+                        onVideoReady={() => setIsVideoReady(true)}
                         />
                     </group>
                 </group>
