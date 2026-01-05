@@ -83,7 +83,7 @@ export default function App() {
 
         {phase === 3 && (
           <div className="end-card">
-            <h1><span>素敵な一年になりますように</span>🎉</h1>
+            <h1><span>素敵な一年になりますように</span></h1>
           </div>
         )}
       </div>

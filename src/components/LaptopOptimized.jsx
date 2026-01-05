@@ -36,15 +36,13 @@ export const Laptop = forwardRef(({ phase, onEnded, onVideoReady, ...props }, re
         onVideoReady && onVideoReady()
       }
     }
-
     // A. 普通の監視（レベル1以上で合格）
     if (video.readyState >= 1) {
       handleReady()
     } else {
       video.addEventListener('loadedmetadata', handleReady)
     }
-
-    // B. 【保険】もし3秒経っても反応がなければ、強制的にReadyにする
+    // B.3秒経っても反応がなければ、強制的にReadyにする
     // （iPhoneが完全に読み込みをサボっている場合への対策）
     const timer = setTimeout(() => {
       console.log("Force video ready due to timeout")
